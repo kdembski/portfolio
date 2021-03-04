@@ -12,7 +12,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-// -----------------------------------------------------
 .page-loader {
   display: flex;
   justify-content: center;
@@ -25,7 +24,6 @@ export default {};
   background-color: white;
   z-index: 1000;
 }
-// -----------------------------------------------------
 .cube {
   width: 40px;
   height: 40px;
@@ -34,12 +32,11 @@ export default {};
   transform-origin: center;
   @for $i from 1 through 4 {
     &:nth-child(#{$i}) {
-      animation: jump-up 1.2s 0.1s * $i infinite;
+      animation: grow 1.2s 0.1s * $i infinite;
     }
   }
 }
-// -----------------------------------------------------
-@keyframes jump-up {
+@keyframes grow {
   33% {
     background-color: $darkBlue;
     transform: scaleY(1.8);

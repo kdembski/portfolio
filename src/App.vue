@@ -28,10 +28,10 @@
         </div>
       </div>
     </div>
-    <transition-group name="router-view-transition" mode="out-in">
-      <page-loader v-if="!isLoaded" key="pageLoader" />
-      <router-view v-if="isLoaded" key="routerView" />
-    </transition-group>
+    <transition name="router-view-transition" mode="out-in">
+      <page-loader v-if="loading"></page-loader>
+      <router-view v-if="!loading" />
+    </transition>
   </div>
 </template>
 <script>
@@ -80,7 +80,7 @@ export default {
         },
       ],
       navbarCollapsed: true,
-      isLoaded: false,
+      loading: true,
     };
   },
   computed: {
@@ -114,7 +114,7 @@ export default {
     document.onreadystatechange = () => {
       if (document.readyState == "complete") {
         setTimeout(() => {
-          this.isLoaded = true;
+          this.loading = false;
         }, 500);
       }
     };
@@ -177,6 +177,9 @@ $navBarTransitionTime: 0.6s;
   display: inline-block;
   transition: width $navBarTransitionTime ease-in-out;
   cursor: pointer;
+  &:hover .name-letter {
+    color: $darkBlue;
+  }
   & .name-letter {
     display: inline-block;
     width: calc(93% / 12);
@@ -289,10 +292,10 @@ $navBarTransitionTime: 0.6s;
     opacity: 0;
   }
   &-enter-active {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
   &-leave-active {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 }
 
@@ -410,6 +413,7 @@ $navBarTransitionTime: 0.6s;
   }
   .collapse-navbar-button-container {
     top: 7px;
+    right: 18px;
   }
   .collapse-navbar-button {
     & .collapse-navbar-button-bar {
@@ -431,6 +435,9 @@ $navBarTransitionTime: 0.6s;
         }
       }
     }
+  }
+  .navbar-container {
+    padding: 1rem 1rem;
   }
 }
 @media (max-width: 400px) {

@@ -35,7 +35,7 @@
           class="next-page-button-container"
           data-aos="zoom-in-down"
           data-aos-duration="600"
-          data-aos-delay="800"
+          data-aos-delay="400"
           data-aos-easing="ease-out-quart"
         >
           <div
@@ -63,7 +63,8 @@
               v-for="(item, index) in music"
               :key="index"
               class="music-item"
-              data-aos="zoom-out-up"
+              data-aos="fade-up"
+              data-aos-easing="ease-out-quart"
               :data-aos-delay="windowWidth >= 1200 ? 200 * index : 0"
               data-aos-duration="800"
             >
@@ -93,7 +94,7 @@
       <!--cooking-->
       <div class="cooking-container" id="cooking-container">
         <div class="cooking-wrap row">
-          <div class="col-lg-6 d-flex align-items-center">
+          <div class="col-lg-6 p-0 d-flex align-items-center">
             <div>
               <div class="cooking-header">Gotowanie</div>
               <div class="cooking-text">
@@ -109,9 +110,12 @@
               v-for="(image, index) in cookingImages"
               :key="index"
               class="cooking-item-wrap"
-              data-aos="flip-left"
-              data-aos-duration="1000"
-              :data-aos-delay="windowWidth >= 1200 ? 100 * index : 0"
+              data-aos="fade-down"
+              data-aos-easing="ease-out-quart"
+              data-aos-duration="500"
+              :data-aos-delay="
+                windowWidth >= 1200 ? 200 * (cookingImages.length - index) : 0
+              "
             >
               <div class="cooking-item">
                 <img
@@ -154,7 +158,8 @@
               :key="index"
               class="games-item"
               @click="flipCard(game)"
-              data-aos="zoom-out-up"
+              data-aos="fade-up"
+              data-aos-easing="ease-out-quart"
               data-aos-duration="600"
               :data-aos-delay="windowWidth >= 1200 ? 150 * index : 0"
             >
@@ -332,8 +337,8 @@ export default {
     height: 60vh;
     background-color: $lightGrey;
     border: 1px solid $lightGrey;
-    opacity: 0;
-    animation: gallery-item-animation 1s 0.25s ease-out forwards;
+    pointer-events: none;
+    animation: gallery-item-animation 1s forwards;
 
     & .item {
       flex: 1;
@@ -345,6 +350,7 @@ export default {
       background-color: $primaryGrey;
       background-blend-mode: luminosity;
       transition: all 0.5s 0.1s ease;
+
       &:hover {
         flex: 4;
         background-color: transparent;
@@ -361,10 +367,11 @@ export default {
       & .item-zoomed {
         position: absolute;
         width: 70%;
-        height: 90%;
-        top: 5%;
+        height: 94%;
+        top: 3%;
         left: 15%;
         object-fit: cover;
+        background-color: $lightGrey;
         box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
       }
       & .button-left,
@@ -486,7 +493,7 @@ export default {
       object-fit: contain;
       opacity: 0.9;
       border-radius: 15px;
-      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
     }
   }
   & .games-item {
@@ -507,7 +514,7 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
       border-radius: 10px;
     }
     & .games-item-details {
@@ -516,7 +523,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
       background-color: white;
@@ -554,7 +561,7 @@ export default {
     position: absolute;
     width: 40%;
     height: 55%;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
     background: white;
     padding: 10px;
     &:nth-child(1) {
@@ -647,10 +654,12 @@ export default {
 }
 @keyframes gallery-item-animation {
   0% {
-    opacity: 0;
+    pointer-events: none;
+  }
+  99% {
+    pointer-events: none;
   }
   100% {
-    opacity: 1;
     pointer-events: initial;
   }
 }
@@ -783,7 +792,7 @@ export default {
         display: flex;
         overflow-x: visible;
         height: 300px;
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         padding: 0;
         &::-webkit-scrollbar {
           display: none;
@@ -885,7 +894,9 @@ export default {
     & .cooking-text,
     & .games-text,
     & .music-text {
-      font-size: 22px;
+      font-size: 20px;
+      text-align: justify;
+      text-justify: auto;
     }
     & .music-item {
       width: 100%;
