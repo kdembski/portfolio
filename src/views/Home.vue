@@ -24,7 +24,7 @@
           </div>
           <div class="introduction-text second">
             Od niedawna zajmuję się tworzeniem aplikacji webowych. Informacje na
-            temat moich projektach znajdziesz tutaj:
+            temat moich projektów znajdziesz tutaj:
             <div class="router-link-container">
               <router-link
                 to="/projects"
@@ -656,11 +656,7 @@ export default {
 .home {
   display: flex;
   align-items: center;
-  position: absolute;
-  left: 0;
-  top: 100px;
-  right: 0;
-  bottom: 0;
+  min-height: calc(100vh - 110px);
 }
 .router-link-container {
   @include flex-center;
@@ -699,11 +695,16 @@ export default {
     }
   }
 }
+.introduction-container {
+  margin-top: -30px;
+}
 .introduction-header {
   font-size: 40px;
   font-weight: 700;
   color: $primaryGrey;
   text-align: center;
+  opacity: 0;
+  animation: introduction-animation 0.6s ease-out forwards;
 }
 .introduction-text {
   font-size: 30px;
@@ -711,35 +712,78 @@ export default {
   color: $lightGrey;
   text-align: center;
   margin-top: 2rem;
-}
-.home-svg {
-  height: 680px;
-  padding-top: 3rem;
+  opacity: 0;
+  &.first {
+    animation: introduction-animation 0.6s ease-out forwards;
+  }
+  &.second {
+    animation: introduction-animation 0.6s ease-out forwards;
+  }
 }
 .paper {
-  @for $i from 1 through 14 {
+  &-1 {
+    opacity: 0;
+    animation: paper-animation-1 0.6s 0.1s ease-out forwards;
+  }
+  &-2 {
+    opacity: 0;
+    animation: paper-animation-1 0.6s 0.2s ease-out forwards;
+  }
+  $i: 5;
+  @while $i < 16 {
+    &-#{$i - 2} {
+      opacity: 0;
+      animation: paper-animation-3 0.6s 0.1s * ($i - 2) ease-out forwards;
+    }
+    &-#{$i - 1} {
+      opacity: 0;
+      animation: paper-animation-1 0.6s 0.1s * ($i - 1) ease-out forwards;
+    }
     &-#{$i} {
       opacity: 0;
-      animation: paper-animation 0.6s 0.2s + 0.15s * $i ease-out forwards;
+      animation: paper-animation-2 0.6s 0.1s * $i ease-out forwards;
     }
+    $i: $i + 3;
   }
 }
 @keyframes introduction-animation {
   0% {
+    transform: translateX(-15%);
     opacity: 0;
   }
   100% {
+    transform: translateX(0%);
     opacity: 1;
   }
 }
-@keyframes paper-animation {
+@keyframes paper-animation-1 {
   0% {
     opacity: 0;
-    transform: scale(1.05) translateY(5%);
+    transform: translateX(10%);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0%);
+    transform: translateX(0%);
+  }
+}
+@keyframes paper-animation-2 {
+  0% {
+    opacity: 0;
+    transform: translate(10%, 10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%);
+  }
+}
+@keyframes paper-animation-3 {
+  0% {
+    opacity: 0;
+    transform: translate(10%, -10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
   }
 }
 
@@ -752,6 +796,7 @@ export default {
 @media (max-width: 992px) {
   .introduction-header {
     font-size: 38px;
+    margin-top: 2rem;
   }
   .introduction-text {
     font-size: 28px;
@@ -762,8 +807,10 @@ export default {
     padding: 10px 15px;
   }
   .home {
-    display: initial;
-    position: initial;
+    height: unset;
+  }
+  .home-svg {
+    padding-top: 3rem;
   }
 }
 @media (max-width: 768px) {

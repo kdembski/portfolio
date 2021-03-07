@@ -31,13 +31,7 @@
             </transition>
           </div>
         </div>
-        <div
-          class="next-page-button-container"
-          data-aos="zoom-in-down"
-          data-aos-duration="600"
-          data-aos-delay="400"
-          data-aos-easing="ease-out-quart"
-        >
+        <div class="next-page-button-container">
           <div
             class="next-page-button"
             @click="scrollIntoView('music-container')"
@@ -193,7 +187,6 @@
           >
             <div class="next-page-button-arrow up first"></div>
             <div class="next-page-button-arrow up second"></div>
-            <div class="next-page-button-arrow up third"></div>
           </div>
         </div>
       </div>
@@ -264,6 +257,7 @@ export default {
       displayedImageIndex: 0,
       displayZoomedImage: false,
       imageTransitionDirection: "",
+      loadedImages: [],
     };
   },
   computed: {
@@ -349,7 +343,7 @@ export default {
       background-repeat: none;
       background-color: $primaryGrey;
       background-blend-mode: luminosity;
-      transition: all 0.5s 0.1s ease;
+      transition: all 0.5s 0.1s ease-in-out;
 
       &:hover {
         flex: 4;
@@ -422,17 +416,14 @@ export default {
     transform: rotate(45deg);
     &.up {
       position: absolute;
-      left: 32%;
+      left: 31%;
       border-top: 3px solid $darkBlue;
       border-left: 3px solid $darkBlue;
       &.first {
-        top: 25%;
+        top: 30%;
       }
       &.second {
-        top: 40%;
-      }
-      &.third {
-        top: 55%;
+        top: 50%;
       }
     }
     &.down {
@@ -507,6 +498,7 @@ export default {
     }
     perspective: 1500px;
     cursor: pointer;
+    user-select: none;
     & .games-item-img {
       position: absolute;
       top: 0;

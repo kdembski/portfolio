@@ -292,10 +292,10 @@ $navBarTransitionTime: 0.6s;
     opacity: 0;
   }
   &-enter-active {
-    transition: all 0.25s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
   &-leave-active {
-    transition: all 0.25s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 
