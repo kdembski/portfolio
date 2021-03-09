@@ -22,7 +22,7 @@ export default {};
   width: 100vw;
   height: 100vh;
   background-color: white;
-  z-index: 1000;
+  z-index: 998;
 }
 .cube {
   width: 40px;

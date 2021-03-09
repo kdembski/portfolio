@@ -1,201 +1,208 @@
 <template>
-  <div class="about">
-    <div class="main-container overflow-hidden">
-      <!--gallery-->
-      <div class="gallery-container" id="gallery-container">
-        <div class="gallery-wrap">
-          <div
-            v-for="index in imagesNumber"
-            :key="index"
-            class="item"
-            :style="{
-              backgroundImage:
-                'url(' + require(`../assets/images/${images[index - 1]}`) + ')',
-            }"
-          ></div>
-          <div class="item-zoomed-container">
-            <div class="button-left" @click="decreaseDisplayedImageIndex">
-              <i class="fas fa-chevron-left"></i>
-            </div>
-            <div class="button-right" @click="increaseDisplayedImageIndex">
-              <i class="fas fa-chevron-right"></i>
-            </div>
-            <transition :name="imageTransitionDirection">
-              <img
-                class="item-zoomed"
-                :key="displayedImageIndex"
-                :src="
-                  require(`../assets/images/${images[displayedImageIndex]}`)
-                "
-              />
-            </transition>
-          </div>
-        </div>
-        <div class="next-page-button-container">
-          <div
-            class="next-page-button"
-            @click="scrollIntoView('music-container')"
-          >
-            <div class="next-page-button-arrow down"></div>
-          </div>
-        </div>
-      </div>
-      <!--music-->
-      <div class="music-container" id="music-container">
-        <div class="music-wrap">
-          <div class="music-header">
-            Muzyka
-          </div>
-          <div class="music-text">
-            Gdyby ktoś mnie zapytał o mój ulubiony gatunek muzyki, miałbym nie
-            mały problem z odpowiedzią. Jeżeli już musiałbym wskazać jeden,
-            byłoby to prawdopodobnie coś z okolic Soft rock'a. Poniżej znajdują
-            się kilka utworów, które wybrałem z moich playlist.
-          </div>
-          <div class="music-item-container">
+  <transition name="router-view-transition" mode="out-in">
+    <page-loader v-if="loading"></page-loader>
+    <div v-else class="about">
+      <div class="main-container">
+        <!--gallery-->
+        <div class="gallery-container" id="gallery-container">
+          <div class="gallery-wrap">
             <div
-              v-for="(item, index) in music"
+              v-for="index in imagesNumber"
               :key="index"
-              class="music-item"
-              data-aos="fade-up"
-              data-aos-easing="ease-out-quart"
-              :data-aos-delay="windowWidth >= 1200 ? 200 * index : 0"
-              data-aos-duration="800"
-            >
-              <iframe
-                :src="item"
-                allowtransparency="true"
-                allow="encrypted-media"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-        <div
-          class="next-page-button-container"
-          data-aos="zoom-in-down"
-          data-aos-duration="600"
-          data-aos-delay="500"
-          data-aos-easing="ease-out-quart"
-        >
-          <div
-            class="next-page-button"
-            @click="scrollIntoView('cooking-container')"
-          >
-            <div class="next-page-button-arrow down"></div>
-          </div>
-        </div>
-      </div>
-      <!--cooking-->
-      <div class="cooking-container" id="cooking-container">
-        <div class="cooking-wrap row">
-          <div class="col-lg-6 p-0 d-flex align-items-center">
-            <div>
-              <div class="cooking-header">Gotowanie</div>
-              <div class="cooking-text">
-                W gotowaniu nie chodzi mi o sam fakt przygotowywania jedzenia.
-                Chodzi mi o poznawanie i poszukiwanie nowych smaków. Lubię
-                eksperymentować z jedzeniem, łączyć ze sobą składniki, które na
-                pierwszy rzut oka do siebie nie pasują.
+              class="item"
+              :style="{
+                backgroundImage:
+                  'url(' +
+                  require(`../assets/images/${images[index - 1]}`) +
+                  ')',
+              }"
+            ></div>
+            <div class="item-zoomed-container">
+              <div class="button-left" @click="decreaseDisplayedImageIndex">
+                <i class="fas fa-chevron-left"></i>
               </div>
-            </div>
-          </div>
-          <div class="cooking-item-container col-lg-6">
-            <div
-              v-for="(image, index) in cookingImages"
-              :key="index"
-              class="cooking-item-wrap"
-              data-aos="fade-down"
-              data-aos-easing="ease-out-quart"
-              data-aos-duration="500"
-              :data-aos-delay="
-                windowWidth >= 1200 ? 200 * (cookingImages.length - index) : 0
-              "
-            >
-              <div class="cooking-item">
-                <img
-                  class="cooking-item-image"
-                  :src="require(`../assets/cooking/${image.src}`)"
-                />
-                <div class="cooking-item-name">{{ image.name }}</div>
+              <div class="button-right" @click="increaseDisplayedImageIndex">
+                <i class="fas fa-chevron-right"></i>
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="next-page-button-container"
-          data-aos="zoom-in-down"
-          data-aos-duration="600"
-          data-aos-delay="500"
-          data-aos-easing="ease-out-quart"
-        >
-          <div
-            class="next-page-button"
-            @click="scrollIntoView('games-container')"
-          >
-            <div class="next-page-button-arrow down"></div>
-          </div>
-        </div>
-      </div>
-      <!--games-->
-      <div class="games-container" id="games-container">
-        <div class="games-wrap">
-          <div class="games-header">Gry strategiczne</div>
-          <div class="games-text">
-            Grami strategicznymi interesuję się od najmłodszych lat – zarówno
-            komputerowymi, planszowymi, jak i karcianymi. Lubię, kiedy gra
-            pomaga się rozwinąć. Oto kilka przykładów gier, w które w wolnym
-            czasie pogrywałem (kliknij na kartę, aby zobaczyć szczegóły):
-          </div>
-          <div class="games-item-container">
-            <div
-              v-for="(game, index) in games"
-              :key="index"
-              class="games-item"
-              @click="flipCard(game)"
-              data-aos="fade-up"
-              data-aos-easing="ease-out-quart"
-              data-aos-duration="600"
-              :data-aos-delay="windowWidth >= 1200 ? 150 * index : 0"
-            >
-              <transition name="games-item-transition">
+              <transition :name="imageTransitionDirection">
                 <img
-                  v-if="!game.flipped"
-                  class="games-item-img"
-                  :src="require(`../assets/games/${game.img}`)"
-                  key="front"
+                  class="item-zoomed"
+                  :key="displayedImageIndex"
+                  :src="
+                    require(`../assets/images/${images[displayedImageIndex]}`)
+                  "
                 />
-                <div v-else class="games-item-details" key="back">
-                  <div class="games-item-name">{{ game.name }}</div>
-                  <div class="games-item-description">
-                    {{ game.description }}
-                  </div>
-                </div>
               </transition>
             </div>
           </div>
+          <div class="next-page-button-container">
+            <div
+              class="next-page-button"
+              @click="scrollIntoView('music-container')"
+            >
+              <div class="next-page-button-arrow down"></div>
+            </div>
+          </div>
         </div>
-        <div
-          class="next-page-button-container"
-          data-aos="zoom-in-down"
-          data-aos-duration="600"
-          data-aos-delay="300"
-          data-aos-easing="ease-out-quart"
-        >
+        <!--music-->
+        <div class="music-container" id="music-container">
+          <div class="music-wrap">
+            <div class="music-header">
+              Muzyka
+            </div>
+            <div class="music-text">
+              Gdyby ktoś mnie zapytał o mój ulubiony gatunek muzyki, miałbym nie
+              mały problem z odpowiedzią. Jeżeli już musiałbym wskazać jeden,
+              byłoby to prawdopodobnie coś z okolic Soft rock'a. Poniżej
+              znajdują się kilka utworów, które wybrałem z moich playlist.
+            </div>
+            <div class="music-item-container">
+              <div
+                v-for="(item, index) in music"
+                :key="index"
+                class="music-item"
+                data-aos="fade-up"
+                data-aos-easing="ease-out-quart"
+                :data-aos-delay="windowWidth >= 1200 ? 200 * index : 0"
+                data-aos-duration="800"
+              >
+                <iframe
+                  :src="item"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                ></iframe>
+              </div>
+            </div>
+          </div>
           <div
-            class="next-page-button"
-            @click="scrollIntoView('gallery-container')"
+            class="next-page-button-container"
+            data-aos="zoom-in-down"
+            data-aos-duration="600"
+            data-aos-delay="500"
+            data-aos-easing="ease-out-quart"
           >
-            <div class="next-page-button-arrow up first"></div>
-            <div class="next-page-button-arrow up second"></div>
+            <div
+              class="next-page-button"
+              @click="scrollIntoView('cooking-container')"
+            >
+              <div class="next-page-button-arrow down"></div>
+            </div>
+          </div>
+        </div>
+        <!--cooking-->
+        <div class="cooking-container" id="cooking-container">
+          <div class="cooking-wrap row">
+            <div class="col-lg-6 p-0 d-flex align-items-center">
+              <div>
+                <div class="cooking-header">Gotowanie</div>
+                <div class="cooking-text">
+                  W gotowaniu nie chodzi mi o sam fakt przygotowywania jedzenia.
+                  Chodzi mi o poznawanie i poszukiwanie nowych smaków. Lubię
+                  eksperymentować z jedzeniem, łączyć ze sobą składniki, które
+                  na pierwszy rzut oka do siebie nie pasują.
+                </div>
+              </div>
+            </div>
+            <div class="cooking-item-container col-lg-6">
+              <div
+                v-for="(image, index) in cookingImages"
+                :key="index"
+                class="cooking-item-wrap"
+                data-aos="fade-down"
+                data-aos-easing="ease-out-quart"
+                data-aos-duration="500"
+                :data-aos-delay="
+                  windowWidth >= 1200 ? 200 * (cookingImages.length - index) : 0
+                "
+              >
+                <div class="cooking-item">
+                  <img
+                    class="cooking-item-image"
+                    :src="require(`../assets/cooking/${image.src}`)"
+                  />
+                  <div class="cooking-item-name">{{ image.name }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="next-page-button-container"
+            data-aos="zoom-in-down"
+            data-aos-duration="600"
+            data-aos-delay="500"
+            data-aos-easing="ease-out-quart"
+          >
+            <div
+              class="next-page-button"
+              @click="scrollIntoView('games-container')"
+            >
+              <div class="next-page-button-arrow down"></div>
+            </div>
+          </div>
+        </div>
+        <!--games-->
+        <div class="games-container" id="games-container">
+          <div class="games-wrap">
+            <div class="games-header">Gry strategiczne</div>
+            <div class="games-text">
+              Grami strategicznymi interesuję się od najmłodszych lat – zarówno
+              komputerowymi, planszowymi, jak i karcianymi. Lubię, kiedy gra
+              pomaga się rozwinąć. Oto kilka przykładów gier, w które w wolnym
+              czasie pogrywałem (kliknij na kartę, aby zobaczyć szczegóły):
+            </div>
+            <div class="games-item-container">
+              <div
+                v-for="(game, index) in games"
+                :key="index"
+                class="games-item"
+                @click="flipCard(game)"
+                data-aos="fade-up"
+                data-aos-easing="ease-out-quart"
+                data-aos-duration="600"
+                :data-aos-delay="windowWidth >= 1200 ? 150 * index : 0"
+              >
+                <transition name="games-item-transition">
+                  <img
+                    v-if="!game.flipped"
+                    class="games-item-img"
+                    :src="require(`../assets/games/${game.img}`)"
+                    key="front"
+                  />
+                  <div v-else class="games-item-details" key="back">
+                    <div class="games-item-name">{{ game.name }}</div>
+                    <div class="games-item-description">
+                      {{ game.description }}
+                    </div>
+                  </div>
+                </transition>
+              </div>
+            </div>
+          </div>
+          <div
+            class="next-page-button-container"
+            data-aos="zoom-in-down"
+            data-aos-duration="600"
+            data-aos-delay="300"
+            data-aos-easing="ease-out-quart"
+          >
+            <div
+              class="next-page-button"
+              @click="scrollIntoView('gallery-container')"
+            >
+              <div class="next-page-button-arrow up first"></div>
+              <div class="next-page-button-arrow up second"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import PageLoader from "../components/pageLoader.vue";
 export default {
+  components: { PageLoader },
   name: "About",
   data() {
     return {
@@ -258,6 +265,7 @@ export default {
       displayZoomedImage: false,
       imageTransitionDirection: "",
       loadedImages: [],
+      loading: true,
     };
   },
   computed: {
@@ -311,6 +319,13 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", this.handleResize);
+  },
+  mounted() {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
+    });
   },
 };
 </script>
@@ -366,7 +381,7 @@ export default {
         left: 15%;
         object-fit: cover;
         background-color: $lightGrey;
-        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
       }
       & .button-left,
       & .button-right {

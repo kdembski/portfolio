@@ -1,38 +1,42 @@
 <template>
-  <div id="app">
-    <div class="custom-navbar" :class="{ collapsed: navbarCollapsed }">
-      <div class="navbar-container">
-        <div class="name-container" @click="pushRouterToHome">
-          <div v-for="(letter, index) in name" :key="index" class="name-letter">
-            {{ letter.letter }}
+  <transition name="router-view-transition" mode="out-in">
+    <page-loader v-if="loading"></page-loader>
+    <div v-else id="app">
+      <div class="custom-navbar" :class="{ collapsed: navbarCollapsed }">
+        <div class="navbar-container">
+          <div class="name-container" @click="pushRouterToHome">
+            <div
+              v-for="(letter, index) in name"
+              :key="index"
+              class="name-letter"
+            >
+              {{ letter.letter }}
+            </div>
           </div>
-        </div>
-        <div class="router-links-container">
-          <router-link to="/about" class="custom-router-link"
-            >O mnie</router-link
-          >
-          <router-link to="/projects" class="custom-router-link"
-            >Projekty</router-link
-          >
-          <router-link to="/contact" class="custom-router-link"
-            >Kontakt</router-link
-          >
-        </div>
-        <div class="collapse-navbar-button-container">
-          <div
-            class="collapse-navbar-button"
-            @click="navbarCollapsed = !navbarCollapsed"
-          >
-            <div class="collapse-navbar-button-bar"></div>
+          <div class="router-links-container">
+            <router-link to="/about" class="custom-router-link"
+              >O mnie</router-link
+            >
+            <router-link to="/projects" class="custom-router-link"
+              >Projekty</router-link
+            >
+            <router-link to="/contact" class="custom-router-link"
+              >Kontakt</router-link
+            >
+          </div>
+          <div class="collapse-navbar-button-container">
+            <div
+              class="collapse-navbar-button"
+              @click="navbarCollapsed = !navbarCollapsed"
+            >
+              <div class="collapse-navbar-button-bar"></div>
+            </div>
           </div>
         </div>
       </div>
+      <router-view />
     </div>
-    <transition name="router-view-transition" mode="out-in">
-      <page-loader v-if="loading"></page-loader>
-      <router-view v-if="!loading" />
-    </transition>
-  </div>
+  </transition>
 </template>
 <script>
 import pageLoader from "./components/pageLoader.vue";
@@ -284,21 +288,6 @@ $navBarTransitionTime: 0.6s;
   }
 }
 
-.router-view-transition {
-  &-enter {
-    opacity: 0;
-  }
-  &-leave-to {
-    opacity: 0;
-  }
-  &-enter-active {
-    transition: all 0.2s ease-in-out;
-  }
-  &-leave-active {
-    transition: all 0.2s ease-in-out;
-  }
-}
-
 @media (max-width: 1500px) {
   .navbar-container {
     width: 100%;
@@ -307,24 +296,27 @@ $navBarTransitionTime: 0.6s;
 @media (max-width: 1200px) {
   .router-links-container {
     display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    transition: padding-top 0.5s ease-in-out, border-color 0.5s ease-in-out;
-    padding-top: 45px;
-    border-bottom: 1px solid $darkBlue;
+    height: 100%;
+    padding-top: 50px;
+    transition: opacity 0.5s ease-in-out;
+    background-color: white;
+    opacity: 1;
   }
   .custom-router-link {
-    display: flex;
-    justify-content: center;
+    @include flex-center;
     width: 100%;
-    max-height: 100px;
-    height: 100px;
+    min-height: 100px;
     overflow: hidden;
     font-size: 30px;
     letter-spacing: 10px;
     @for $i from 1 through 3 {
       &:nth-child(#{$i}) {
         transition: color 0.2s ease-in-out, opacity 0.3s 0.2s * $i ease-in-out,
-          transform 0.3s 0.2s * $i ease-in-out, max-height 0.5s ease-in-out;
+          transform 0.3s 0.2s * $i ease-in-out;
       }
     }
   }
@@ -339,16 +331,14 @@ $navBarTransitionTime: 0.6s;
       }
       & .router-links-container {
         width: 100%;
-        padding-top: 0;
-        border-bottom: 1px solid transparent;
-        transition: padding-top 0.5s ease-in-out, border-color 0.5s ease-in-out;
-
+        transition: transform 0s 0.5s, opacity 0.5s ease-in-out;
+        transform: translateY(-100%);
+        opacity: 0;
         & .custom-router-link {
           opacity: 0;
           transform: translateY(-30px);
-          max-height: 0;
           transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out,
-            transform 0.2s ease-in-out, max-height 0.5s ease-in-out;
+            transform 0.2s ease-in-out;
         }
       }
     }

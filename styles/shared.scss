@@ -14,10 +14,26 @@ $lightShadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   margin: auto;
   padding: 0 1.5rem;
 }
+.router-view-transition {
+  &-enter {
+    opacity: 0;
+  }
+  &-leave-to {
+    opacity: 0;
+  }
+  &-enter-active {
+    transition: all 0.3s ease-in-out;
+  }
+  &-leave-active {
+    transition: all 0.3s ease-in-out;
+  }
+}
+
 @media (max-width: 1500px) {
   .main-container {
     width: 100%;
     margin: 0;
+    overflow: hidden;
   }
 }
 @media (max-width: 1200px) {

@@ -19,7 +19,7 @@ export default new Vuex.Store({
       "11.jpg",
       "12.jpg",
     ],
-    loading: false,
+    loading: true,
   },
   mutations: {
     setLoading(state, loading) {
