@@ -1,7 +1,6 @@
 <template>
-  <transition name="router-view-transition" mode="out-in">
-    <page-loader v-if="loading"></page-loader>
-    <div v-else id="app">
+  <transition appear name="router-view-transition">
+    <div id="app">
       <div class="custom-navbar" :class="{ collapsed: navbarCollapsed }">
         <div class="navbar-container">
           <div class="name-container" @click="pushRouterToHome">
@@ -39,9 +38,7 @@
   </transition>
 </template>
 <script>
-import pageLoader from "./components/pageLoader.vue";
 export default {
-  components: { pageLoader },
   name: "App",
   data() {
     return {
@@ -113,15 +110,6 @@ export default {
     currentPath: function() {
       this.navbarCollapsed = true;
     },
-  },
-  mounted() {
-    document.onreadystatechange = () => {
-      if (document.readyState == "complete") {
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      }
-    };
   },
 };
 </script>

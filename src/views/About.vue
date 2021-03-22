@@ -63,7 +63,7 @@
                 class="music-item"
                 data-aos="fade-up"
                 data-aos-easing="ease-out-quart"
-                :data-aos-delay="windowWidth >= 1200 ? 200 * index : 0"
+                :data-aos-delay="windowWidth >= 1200 ? 200 + 200 * index : 0"
                 data-aos-duration="800"
               >
                 <iframe
@@ -78,7 +78,7 @@
             class="next-page-button-container"
             data-aos="zoom-in-down"
             data-aos-duration="600"
-            data-aos-delay="500"
+            data-aos-delay="700"
             data-aos-easing="ease-out-quart"
           >
             <div
@@ -112,7 +112,9 @@
                 data-aos-easing="ease-out-quart"
                 data-aos-duration="500"
                 :data-aos-delay="
-                  windowWidth >= 1200 ? 200 * (cookingImages.length - index) : 0
+                  windowWidth >= 1200
+                    ? 200 + 200 * (cookingImages.length - index)
+                    : 0
                 "
               >
                 <div class="cooking-item">
@@ -129,7 +131,7 @@
             class="next-page-button-container"
             data-aos="zoom-in-down"
             data-aos-duration="600"
-            data-aos-delay="500"
+            data-aos-delay="800"
             data-aos-easing="ease-out-quart"
           >
             <div
@@ -158,8 +160,8 @@
                 @click="flipCard(game)"
                 data-aos="fade-up"
                 data-aos-easing="ease-out-quart"
-                data-aos-duration="600"
-                :data-aos-delay="windowWidth >= 1200 ? 150 * index : 0"
+                data-aos-duration="900"
+                :data-aos-delay="windowWidth >= 1200 ? 200 + 150 * index : 0"
               >
                 <transition name="games-item-transition">
                   <img
@@ -182,7 +184,7 @@
             class="next-page-button-container"
             data-aos="zoom-in-down"
             data-aos-duration="600"
-            data-aos-delay="300"
+            data-aos-delay="700"
             data-aos-easing="ease-out-quart"
           >
             <div

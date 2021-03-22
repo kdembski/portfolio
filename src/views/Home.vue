@@ -745,6 +745,7 @@ export default {
   text-align: center;
   margin-top: 2rem;
   opacity: 0;
+  will-change: transform, opacity;
   &.first {
     animation: introduction-animation 0.6s ease-out forwards;
   }
@@ -755,25 +756,40 @@ export default {
 .paper {
   &-1 {
     opacity: 0;
-    animation: paper-animation-1 0.6s 0.1s ease-out forwards;
+    will-change: transform, opacity;
+    animation: paper-animation-1 0.6s 0.5s ease-out forwards;
   }
   &-2 {
     opacity: 0;
-    animation: paper-animation-1 0.6s 0.2s ease-out forwards;
+    will-change: transform, opacity;
+    animation: paper-animation-1 0.6s 0.6s ease-out forwards;
   }
   $i: 5;
   @while $i < 16 {
     &-#{$i - 2} {
       opacity: 0;
-      animation: paper-animation-3 0.6s 0.1s * ($i - 2) ease-out forwards;
+      will-change: transform, opacity;
+      animation: paper-animation-3
+        0.6s
+        0.5s +
+        (0.1s * ($i - 2))
+        ease-out
+        forwards;
     }
     &-#{$i - 1} {
       opacity: 0;
-      animation: paper-animation-1 0.6s 0.1s * ($i - 1) ease-out forwards;
+      will-change: transform, opacity;
+      animation: paper-animation-1
+        0.6s
+        0.5s +
+        (0.1s * ($i - 1))
+        ease-out
+        forwards;
     }
     &-#{$i} {
       opacity: 0;
-      animation: paper-animation-2 0.6s 0.1s * $i ease-out forwards;
+      will-change: transform, opacity;
+      animation: paper-animation-2 0.6s 0.5s + (0.1s * ($i)) ease-out forwards;
     }
     $i: $i + 3;
   }
@@ -791,7 +807,7 @@ export default {
 @keyframes paper-animation-1 {
   0% {
     opacity: 0;
-    transform: translateX(10%);
+    transform: translateX(5%);
   }
   100% {
     opacity: 1;
@@ -801,7 +817,7 @@ export default {
 @keyframes paper-animation-2 {
   0% {
     opacity: 0;
-    transform: translate(10%, 10%);
+    transform: translate(5%, 5%);
   }
   100% {
     opacity: 1;
@@ -811,7 +827,7 @@ export default {
 @keyframes paper-animation-3 {
   0% {
     opacity: 0;
-    transform: translate(10%, -10%);
+    transform: translate(5%, -5%);
   }
   100% {
     opacity: 1;

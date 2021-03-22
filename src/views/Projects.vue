@@ -438,7 +438,7 @@
         </div>
       </div>
       <!--food tracker-->
-      <div class="food-tracker" id="foodTracker">
+      <div class="project-wraper" id="foodTracker">
         <div class="project-container">
           <project-header
             projectName="Food tracker"
@@ -449,14 +449,14 @@
             składa się z listy składników, instrukcji krok po kroku, zdjęcia
             dania, czasu przygotowania oraz oceny. Dla każdego przepisu liczona
             jest ilość kalorii. W kalendarzu układa sie jadłospis na aktulany
-            tydzień oraz znajduje się dostęp do wszystkich poprzednio ułożonych
-            tygodni. Dla każdego tygodnia tworzona jest lista zakupów. Wszystko
-            przechowywane jest w bazie danych MySQL, która obsługiwana jest przy
-            pomocy MySQLi (rozszerzenie do języka PHP).
+            tydzień oraz na dowolną ilość przyszłych tygodni. Przechowywane są
+            również wszytkie poprzednio ułożone tygodnie. Dla każdego tygodnia
+            tworzona jest lista zakupów. Wszystko przechowywane jest w bazie
+            danych MySQL.
           </project-header>
 
           <div class="row project-images-container">
-            <div class="project-images food-tracker-images">
+            <div class="project-images five-in-a-row">
               <div
                 v-for="(image, index) in projects[0].images"
                 :key="index"
@@ -485,38 +485,22 @@
           </div>
         </div>
       </div>
-      <!--mini games app-->
-      <div class="mini-games-app" id="miniGamesApp">
+      <!--food tracker -2-->
+      <div class="project-wraper" id="foodTracker2">
         <div class="project-container">
           <project-header
-            projectName="Mini games app"
-            projectLink="mini-games-app"
+            projectName="Food tracker 2"
+            projectLink="food-tracker-2"
             :technologiesArray="projects[1].technologies"
           >
-            Aplikacja daje możliwość zagrania w jedną z mini gier. Dostępne gry
-            to:
-            <br />
-            Image puzzle - wybrane zdjęcie zostaje rozbite na 16 części, które
-            są tasowane. Jeden z fragmentów zostaje usunięty, a zadaniem gracza
-            jest przesuwanie pozostałych na powstałe wolne pole tak, aby zdjęcie
-            wróciło do startowego ułożenia.
-            <br />
-            Memory card game - wybrana liczba par kart zostaje losowo rozłożona
-            symbolami do dołu. Gracz wygrywa, gdy znajdzie wszystkie pary kart.
-            <br />
-            Hangman - klasyczna gra w wisielca. Każda litera wylosowanego wyrazu
-            jest reprezentowana przez osobne pole. Gracz musi odgadnąc ukryty
-            wyraz poprzez wskazywanie pojedyńczych liter. Liczba ruchów gracza
-            jest ograniczona.
-            <br />
-            Sequence game - na ekranie zostaje wyświetlona sekwencja
-            ponumerowanych pól. Zadaniem gracza jest powtórzenie wzoru po tym,
-            gdy zniknie z ekranu. Do przejścia jest 13 poziomów, a z każdym
-            kolejnym ilośc pól do zapamiętania rośnie.
+            Druga wersja Food tracker'a. Dodano system logowania i rejestracji,
+            zmieniono cały UI, metodę pobierania danych z bazy oraz sposób
+            zarądzania danymi w aplikacji. Model przepisu pozostał nie
+            zmieniony. Kalendarz wciąż w budowie.
           </project-header>
 
           <div class="row project-images-container">
-            <div class="project-images mini-games-app-images">
+            <div class="project-images five-in-a-row">
               <div
                 v-for="(image, index) in projects[1].images"
                 :key="index"
@@ -545,23 +529,38 @@
           </div>
         </div>
       </div>
-      <!--quiz app-->
-      <div class="quiz-app" id="quizApp">
+      <!--mini games app-->
+      <div class="project-wraper" id="miniGamesApp">
         <div class="project-container">
           <project-header
-            projectName="Quiz app"
-            projectLink="quiz-app"
+            projectName="Mini games app"
+            projectLink="mini-games-app"
             :technologiesArray="projects[2].technologies"
           >
-            Mała aplikacja pozwalająca na rozwiązywanie kilku quizów. Każdy quiz
-            to określona liczba pytań, każde z maksymalnie czterema
-            odpowiedziami. Do odpowiedzi przypisana jest liczba punktów. Punkty
-            wybranych odpowiedzi zostają zsumowane. Każde rozwiązanie ma
-            przedział puntkowy, jeżeli suma uzyskanych punktów znajduje sie w
-            tym przedziale, rozwiązanie to staje sie wynikiem końcowym.
+            Aplikacja daje możliwość zagrania w jedną z mini gier. Dostępne gry
+            to:
+            <br />
+            Image puzzle - wybrane zdjęcie zostaje rozbite na 16 części, które
+            są tasowane. Jeden z fragmentów zostaje usunięty, a zadaniem gracza
+            jest przesuwanie pozostałych na powstałe wolne pole tak, aby zdjęcie
+            wróciło do startowego ułożenia.
+            <br />
+            Memory card game - wybrana liczba par kart zostaje losowo rozłożona
+            symbolami do dołu. Gracz wygrywa, gdy znajdzie wszystkie pary kart.
+            <br />
+            Hangman - klasyczna gra w wisielca. Każda litera wylosowanego wyrazu
+            jest reprezentowana przez osobne pole. Gracz musi odgadnąc ukryty
+            wyraz poprzez wskazywanie pojedyńczych liter. Liczba ruchów gracza
+            jest ograniczona.
+            <br />
+            Sequence game - na ekranie zostaje wyświetlona sekwencja
+            ponumerowanych pól. Zadaniem gracza jest powtórzenie wzoru po tym,
+            gdy zniknie z ekranu. Do przejścia jest 13 poziomów, a z każdym
+            kolejnym ilośc pól do zapamiętania rośnie.
           </project-header>
+
           <div class="row project-images-container">
-            <div class="project-images quiz-app-images">
+            <div class="project-images five-in-a-row">
               <div
                 v-for="(image, index) in projects[2].images"
                 :key="index"
@@ -590,30 +589,23 @@
           </div>
         </div>
       </div>
-      <!--tablut-->
-      <div class="tablut" id="tablut">
+      <!--quiz app-->
+      <div class="project-wraper" id="quizApp">
         <div class="project-container">
           <project-header
-            projectName="Tablut"
-            projectLink="tablut"
+            projectName="Quiz app"
+            projectLink="quiz-app"
             :technologiesArray="projects[3].technologies"
           >
-            Tablut to pochodząca z Laponii strategiczna gra planszowa dla dwóch
-            graczy. Do gry służy kwadratowa plansza podzielona na 81 pól (9x9)
-            oraz zestaw pionów: 16 czarnych i 9 białych, wśród których jeden,
-            specjalnie oznaczony, jest zwany królem. Wszystkie piony poruszają
-            się w pionie lub poziomie o dowolną liczbę pustych pól. Pion zostaje
-            pojmany i usunięty z planszy, gdy przeciwnik zajmie dwa sąsiednie
-            pola w rzędzie lub kolumnie. Pion może jednak bezpiecznie wejść na
-            puste pole pomiędzy pionami przeciwnika. Król zostaje pojmany gdy
-            jest otoczony z czterech stron przez wrogie piony albo gdy jest
-            otoczony nimi z trzech stron, a czwartą jest tron – środkowe pole
-            planszy. To kończy grę wygraną atakujących. Obrońcy wygrywają, gdy
-            król dotrze do krawędzi planszy.
+            Mała aplikacja pozwalająca na rozwiązywanie kilku quizów. Każdy quiz
+            to określona liczba pytań, każde z maksymalnie czterema
+            odpowiedziami. Do odpowiedzi przypisana jest liczba punktów. Punkty
+            wybranych odpowiedzi zostają zsumowane. Każde rozwiązanie ma
+            przedział puntkowy, jeżeli suma uzyskanych punktów znajduje sie w
+            tym przedziale, rozwiązanie to staje sie wynikiem końcowym.
           </project-header>
-
           <div class="row project-images-container">
-            <div class="project-images tablut-images">
+            <div class="project-images four-in-a-row">
               <div
                 v-for="(image, index) in projects[3].images"
                 :key="index"
@@ -642,13 +634,65 @@
           </div>
         </div>
       </div>
+      <!--tablut-->
+      <div class="project-wraper" id="tablut">
+        <div class="project-container">
+          <project-header
+            projectName="Tablut"
+            projectLink="tablut"
+            :technologiesArray="projects[4].technologies"
+          >
+            Tablut to pochodząca z Laponii strategiczna gra planszowa dla dwóch
+            graczy. Do gry służy kwadratowa plansza podzielona na 81 pól (9x9)
+            oraz zestaw pionów: 16 czarnych i 9 białych, wśród których jeden,
+            specjalnie oznaczony, jest zwany królem. Wszystkie piony poruszają
+            się w pionie lub poziomie o dowolną liczbę pustych pól. Pion zostaje
+            pojmany i usunięty z planszy, gdy przeciwnik zajmie dwa sąsiednie
+            pola w rzędzie lub kolumnie. Pion może jednak bezpiecznie wejść na
+            puste pole pomiędzy pionami przeciwnika. Król zostaje pojmany gdy
+            jest otoczony z czterech stron przez wrogie piony albo gdy jest
+            otoczony nimi z trzech stron, a czwartą jest tron – środkowe pole
+            planszy. To kończy grę wygraną atakujących. Obrońcy wygrywają, gdy
+            król dotrze do krawędzi planszy.
+          </project-header>
+
+          <div class="row project-images-container">
+            <div class="project-images five-in-a-row">
+              <div
+                v-for="(image, index) in projects[4].images"
+                :key="index"
+                class="project-images-item"
+                @click="showImageModal(projects[4].images, index)"
+              >
+                <div class="project-images-item-img">
+                  <img :src="require(`../assets/${image.src}`)" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="project-images-item-icon"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                  >
+                    <path
+                      d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5zm-4.5 8h4v-4h1v4h4v1h-4v4h-1v-4h-4v-1z"
+                    />
+                  </svg>
+                </div>
+                <div class="project-images-item-description">
+                  {{ image.description }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!--temtem bot-->
-      <div class="temtem-bot" id="temtemBot">
+      <div class="project-wraper" id="temtemBot">
         <div class="project-container">
           <project-header
             projectName="Temtem Bot"
             projectLink="temtem-bot"
-            :technologiesArray="projects[4].technologies"
+            :technologiesArray="projects[5].technologies"
           >
             Program automatyzujący niektóre fragmenty rozgrywki w grze Temtem.
             Opiera się on głównie o śledzenie tego, co dzieje się na ekranie
@@ -660,12 +704,12 @@
           </project-header>
 
           <div class="row project-images-container">
-            <div class="project-images temtem-bot-images">
+            <div class="project-images four-in-a-row">
               <div
-                v-for="(image, index) in projects[4].images"
+                v-for="(image, index) in projects[5].images"
                 :key="index"
                 class="project-images-item"
-                @click="showImageModal(projects[4].images, index)"
+                @click="showImageModal(projects[5].images, index)"
               >
                 <div class="project-images-item-img">
                   <img :src="require(`../assets/${image.src}`)" />
@@ -802,8 +846,34 @@ export default {
             "JavaScript",
             "CSS3",
             "HTML5",
-            "VueJS",
+            "Vue",
             "PHP",
+            "MySQL",
+            "Bootstrap4",
+          ],
+        },
+        {
+          name: "Food tracker 2",
+          description:
+            "Druga wersja Food tracker'a rozszerzona między innymi o system logowania i rejestracji.",
+          divId: "foodTracker2",
+          images: [
+            { src: "food_tracker_2/1.png", description: "Logowanie" },
+            { src: "food_tracker_2/2.png", description: "Lista przepisów" },
+            { src: "food_tracker_2/3.png", description: "Szczegóły przepisu" },
+            {
+              src: "food_tracker_2/4.png",
+              description: "Dodaj nowy przepis",
+            },
+            { src: "food_tracker_2/5.png", description: "Edytuj przepis" },
+          ],
+          technologies: [
+            "JavaScript",
+            "CSS3",
+            "HTML5",
+            "Vue",
+            "Vuex",
+            "Express",
             "MySQL",
             "Bootstrap4",
           ],
@@ -824,7 +894,7 @@ export default {
             "JavaScript",
             "CSS3",
             "HTML5",
-            "VueJS",
+            "Vue",
             "Sass",
             "Bootstrap4",
           ],
@@ -842,7 +912,7 @@ export default {
             "JavaScript",
             "CSS3",
             "HTML5",
-            "VueJS",
+            "Vue",
             "Sass",
             "Bootstrap4",
           ],
@@ -946,11 +1016,7 @@ export default {
 </script>
 
 <style lang="scss">
-.temtem-bot,
-.tablut,
-.quiz-app,
-.mini-games-app,
-.food-tracker,
+.project-wraper,
 .projects {
   display: flex;
   align-items: center;
@@ -963,13 +1029,13 @@ export default {
 .projects-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: -25px;
   &-item {
     cursor: pointer;
     display: flex;
     opacity: 0;
-    @for $i from 1 through 5 {
+    @for $i from 1 through 6 {
       &:nth-child(#{$i}) {
         animation: projects-list-animation
           0.75s
@@ -1037,19 +1103,10 @@ export default {
   gap: 2rem;
   max-width: 100%;
   margin-top: 2rem;
-  &.food-tracker-images {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  &.mini-games-app-images {
+  &.five-in-a-row {
     grid-template-columns: repeat(5, 1fr);
   }
-  &.quiz-app-images {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  &.tablut-images {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  &.temtem-bot-images {
+  &.four-in-a-row {
     grid-template-columns: repeat(4, 1fr);
   }
   &-item {
@@ -1425,24 +1482,14 @@ export default {
     margin-top: 0px;
   }
   .project-images {
-    &.food-tracker-images {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &.mini-games-app-images {
+    &.five-in-a-row {
       grid-template-columns: repeat(4, 1fr);
     }
-    &.quiz-app-images {
+    &.four-in-a-row {
       grid-template-columns: repeat(3, 1fr);
-    }
-    &.tablut-images {
-      grid-template-columns: repeat(4, 1fr);
     }
   }
-  .temtem-bot,
-  .tablut,
-  .quiz-app,
-  .mini-games-app,
-  .food-tracker,
+  .project-wraper,
   .projects {
     min-height: unset;
     margin-bottom: 3rem;
@@ -1460,32 +1507,17 @@ export default {
 }
 @media (max-width: 992px) {
   .project-images {
-    &.food-tracker-images {
+    &.five-in-a-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &.four-in-a-row {
       grid-template-columns: repeat(2, 1fr);
-    }
-    &.mini-games-app-images {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &.tablut-images {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    &.temtem-bot-images {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
 @media (max-width: 768px) {
   .project-images {
-    &.mini-games-app-images {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &.quiz-app-images {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &.tablut-images {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    &.temtem-bot-images {
+    &.five-in-a-row {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -1501,30 +1533,17 @@ export default {
       }
     }
   }
-  .temtem-bot,
-  .tablut,
-  .quiz-app,
-  .mini-games-app,
-  .food-tracker,
+  .project-wraper,
   .projects {
     min-height: unset;
   }
   .project-images {
     gap: 1rem;
     margin-top: 1rem;
-    &.food-tracker-images {
+    &.five-in-a-row {
       grid-template-columns: repeat(1, 1fr);
     }
-    &.mini-games-app-images {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &.quiz-app-images {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &.tablut-images {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    &.temtem-bot-images {
+    &.four-in-a-row {
       grid-template-columns: repeat(1, 1fr);
     }
   }
@@ -1556,11 +1575,7 @@ export default {
   .project-container {
     margin-top: 0;
   }
-  .temtem-bot,
-  .tablut,
-  .quiz-app,
-  .mini-games-app,
-  .food-tracker,
+  .project-wraper,
   .projects {
     min-height: unset;
     margin-bottom: 3rem;
